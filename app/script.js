@@ -35,7 +35,6 @@ function fetchDataWeather(city){
 }
 
 function showDataWheater(data){
-    console.log(data);
     const weatherData = document.getElementById('weatherData');
     weatherData.innerHTML = '';
 
