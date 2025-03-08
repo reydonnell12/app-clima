@@ -11,6 +11,11 @@ html {
 
 
 /**UTILITIES**/
+#map {
+    margin: 0 auto;
+    width: 300px;
+    height: 200px;
+}
 .title{
     margin-top: 5rem;
     font-size: 3rem;

@@ -4,6 +4,7 @@ let difkelvin = 273.15;
 let weatherData = document.getElementById('weatherData');
 let boton = document.getElementById('boton');
 let input = document.getElementById('input');
+let map; // global variable for the map
 
 boton.addEventListener('click', searchWeather);
 input.addEventListener('keypress', (event)=>{
@@ -47,6 +48,7 @@ function showDataWheater(data){
     const Descripcion_Clima = data.weather[0].description;
     const Viento = data.wind.speed;
     const Icono = data.weather[0].icon; 
+    const { lat, lon } = data.coord;
     const iconUrl = `https://openweathermap.org/img/wn/${Icono}.png`;
 // Ahora es animado 🎬🔥
 
@@ -63,7 +65,21 @@ function showDataWheater(data){
 `;
 
 weatherData.innerHTML = contenido;
+   // Crear mapa con Leaflet
+   if (map) {
+    map.remove(); // Si el mapa ya existe, eliminarlo antes de crear uno nuevo
 }
+map = L.map('map').setView([lat, lon], 10);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+L.marker([lat, lon]).addTo(map)
+    .bindPopup(`<b>${Nombre}</b><br>${Descripcion_Clima}`)
+    .openPopup();
+}
+
 
 
     //Create estructure HTML
